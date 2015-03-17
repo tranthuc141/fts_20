@@ -1,0 +1,11 @@
+<% provide :title, @user.email %>
+<div class="col-md-12" align="center">
+  <ul class ="list-group">
+    <li class="list-group-item list-group-item-info">
+      Email : <%= @user.email%>
+    </li>
+    <li class="list-group-item list-group-item-info">
+      Date of join : <%= @user.created_at %>
+    </li>
+  </ul>
+</div>
