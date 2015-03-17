@@ -1,0 +1,16 @@
+<% provide :title, 'Course list' %>
+<h1>Course list</h1>
+<div class="col-sm-3 col-md-12">
+  <%= will_paginate %>
+  <ul class="list-group">
+    <% @courses.each do |course| %>
+      <li class="list-group-item list-group-item-info">
+        <b><%= link_to course.name, course_path(course) %></b></br>
+        Added <%= time_ago_in_words course.created_at %> ago.
+        <%= link_to "Details", course_path(course),
+                                 class: "btn btn-xs btn-info" %>
+      </li>
+    <% end %>
+  </ul>
+  <%= will_paginate %>
+</div>
