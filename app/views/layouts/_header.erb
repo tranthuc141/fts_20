@@ -8,7 +8,11 @@
           <% if current_user.is_admin? %>
             <%= link_to "User Manage", admin_users_path,
                 class: 'navbar-link' %> |
+            <%= link_to "Course Manage", admin_courses_path,
+                class: 'navbar-link' %> |
           <% end %>
+          <%= link_to "Course list", courses_path,
+                class: 'navbar-link' %> |
           <%= link_to 'Edit profile', edit_user_registration_path,
                 class: 'navbar-link' %> |
           <%= link_to "Logout", destroy_user_session_path, method: :delete,

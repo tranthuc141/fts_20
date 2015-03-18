@@ -1,15 +1,15 @@
-<% provide :title, 'User list' %>
-<h1>User list</h1>
+<% provide :title, 'Course list' %>
+<h1>Course list</h1>
 <div class="col-sm-3 col-md-12">
   <%= will_paginate %>
   <ul class="list-group">
-    <% @users.each do |user| %>
+    <% @courses.each do |course| %>
       <li class="list-group-item list-group-item-info">
-        <b><%= link_to user.email, user_path(user) %></b></br>
-        Added <%= time_ago_in_words user.created_at %> ago.
-        <%= link_to "Details", user_path(user),
+        <b><%= link_to course.name, admin_course_path(course) %></b></br>
+        Added <%= time_ago_in_words course.created_at %> ago.
+        <%= link_to "Details", admin_course_path(course),
                                  class: "btn btn-xs btn-info" %> |
-        <%= link_to "Delete", admin_user_path(user),
+        <%= link_to "Delete", admin_course_path(course),
                                  class: "btn btn-xs btn-warning",
                                  method: :delete,
                                  data: {confirm: 'Are you sure?'} %>
