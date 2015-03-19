@@ -1,11 +1,23 @@
-<% provide :title, @user.email %>
-<div class="col-md-12" align="center">
+<% provide :title, @user.name %>
+<div class="col-md-4">
   <ul class ="list-group">
     <li class="list-group-item list-group-item-info">
-      Email : <%= @user.email%>
+      <% if @user.avatar.present? %>
+        <div class="round-image-50">
+          <%= image_tag(@user.avatar.url) %>
+        </div>
+      <% else %>
+        <div class="round-image-50"><%= image_tag('default.jpg') %></div>
+      <% end %>
     </li>
     <li class="list-group-item list-group-item-info">
-      Date of join : <%= @user.created_at %>
+      Name : <strong><%= @user.name%></strong>
+    </li>
+    <li class="list-group-item list-group-item-info">
+      Email : <strong><%= @user.email%></strong>
+    </li>
+    <li class="list-group-item list-group-item-info">
+      Date of join : <strong><%= @user.created_at %></strong>
     </li>
   </ul>
 </div>

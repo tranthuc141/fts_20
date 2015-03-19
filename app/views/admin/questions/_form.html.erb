@@ -8,11 +8,11 @@
       <%= builder.label :content, 'Option' %>
       <%= builder.text_field :content, class: 'form-control' %>
     </div>
-    <div class="field">
+    <div class="checkbox inline">
       <%= builder.check_box :correct %>
       <%= builder.label :correct, 'Correct?' %>
     </div>
   <% end %>
   <%= f.hidden_field :course_id, value: @course.id%>
-  <p><%= f.submit 'Submit' %></p>
+  <p><%= f.submit 'Submit', class: "btn btn-primary" %></p>
 <% end %>

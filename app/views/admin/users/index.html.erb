@@ -5,12 +5,12 @@
   <ul class="list-group">
     <% @users.each do |user| %>
       <li class="list-group-item list-group-item-info">
-        <b><%= link_to user.email, user_path(user) %></b></br>
+        <b><%= link_to "#{user.name} (#{user.email})", user_path(user) %></b></br>
         Added <%= time_ago_in_words user.created_at %> ago.
         <%= link_to "Details", user_path(user),
                                  class: "btn btn-xs btn-info" %> |
         <%= link_to "Delete", admin_user_path(user),
-                                 class: "btn btn-xs btn-warning",
+                                 class: "btn btn-xs btn-danger",
                                  method: :delete,
                                  data: {confirm: 'Are you sure?'} %>
       </li>
