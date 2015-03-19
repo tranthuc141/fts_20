@@ -1,0 +1,21 @@
+<h1><%= @result.exam.course.name %></h1>
+<div class="col-md-8">
+  <% @result.answers.each_with_index do |answer, index| %>
+    <div>
+      <b><%= "Question #{index+1}." %></b> <%= answer.question.content %> </br>
+    </div>
+    
+    <% answer.question.options.each do |option| %>
+      <div class='radio'>
+        <%= radio_button("option", option.question.id, option.id,
+          checked: answer.option.id == option.id, disabled: true) %>
+        <%= option.content %>
+      </div>
+    <% end %>
+
+    <div class="checkbox inline">
+      <%= check_box("answer", :answer_id,
+        checked: answer.option.correct, disabled: true) %> Correct
+    </div>
+  <% end %>
+</div>

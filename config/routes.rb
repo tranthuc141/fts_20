@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   root  'static_pages#home'
 
   resources :users
-  resources :courses
+  resources :exams do
+    resources :results
+  end
   
   namespace :admin do
     resources :users
