@@ -10,6 +10,7 @@ gem 'sqlite3'
 gem 'sass-rails', '~> 4.0.3'
 gem 'bcrypt',               '3.1.10'
 gem "devise"
+gem 'carrierwave'
 #gem 'will_paginate',           '3.0.7'
 #gem 'bootstrap-will_paginate', '0.0.10'
 # Use Uglifier as compressor for JavaScript assets
