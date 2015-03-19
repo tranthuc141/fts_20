@@ -1,6 +1,8 @@
 <% provide :title, 'Course list' %>
 <h1>Course list</h1>
 <div class="col-sm-3 col-md-12">
+  <%= link_to "Add new course", new_admin_course_path, 
+                                  class: "btn btn-default btn-primary" %></br></br>
   <%= will_paginate %>
   <ul class="list-group">
     <% @courses.each do |course| %>
@@ -8,11 +10,11 @@
         <b><%= link_to course.name, admin_course_path(course) %></b></br>
         Added <%= time_ago_in_words course.created_at %> ago.
         <%= link_to "Details", admin_course_path(course),
-                                 class: "btn btn-xs btn-info" %> |
+                                  class: "btn btn-xs btn-info" %> |
         <%= link_to "Delete", admin_course_path(course),
-                                 class: "btn btn-xs btn-warning",
-                                 method: :delete,
-                                 data: {confirm: 'Are you sure?'} %>
+                                  class: "btn btn-xs btn-danger",
+                                  method: :delete,
+                                  data: {confirm: 'Are you sure?'} %>
       </li>
     <% end %>
   </ul>

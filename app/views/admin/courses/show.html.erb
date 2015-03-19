@@ -6,7 +6,7 @@
       <%= @course.description %>
     </li></br>
     <%= link_to 'Edit description', edit_admin_course_path(@course),
-      remote: true, class: "btn btn-primary" %>
+      remote: true, class: "btn btn-warning" %>
   </div>
 </div>
 
@@ -14,16 +14,17 @@
   <div class="col-md-4">
     <h1>List questions</h1>
     <p>
-      <%= link_to "Show course content", admin_course_path(@course), remote: true %>
+      <%= link_to "Show course content", admin_course_path(@course) %>
     </p>
-    <% @questions.each do |question| %>
-      <p>
-        <%= link_to question.id, admin_question_path(question), remote: true %>
+    <% @questions.each_with_index do |question, index| %>
+      <li>
+        <%= link_to "Question #{index+1}", admin_question_path(question), remote: true %>
         <%= link_to 'Destroy', admin_question_path(question),
           method: :delete, data:{confirm: 'Are you sure?'}, 
-          class: "btn btn-xs btn-warning" %>
-      </p>
+          class: "btn btn-xs btn-danger" %>
+      </li>
     <% end %>
+    </br>
     <%= link_to 'Add a question',
       new_admin_question_path(course_id: @course.id),
       remote: true, class: "btn btn-primary" %>

@@ -40,7 +40,7 @@ class Admin::QuestionsController < ApplicationController
     @question = Question.find params[:id]
     @question.destroy
     flash[:success] = "Question deleted"
-    redirect_to admin_questions_path
+    redirect_to admin_course_path @question.course
   end
 
   private
