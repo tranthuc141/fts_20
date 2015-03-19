@@ -1,5 +1,6 @@
 class Admin::QuestionsController < ApplicationController
   def new
+    @course = Course.find params[:course_id]
     @question = Question.new
     4.times {@question.options.build}
   end
@@ -14,12 +15,13 @@ class Admin::QuestionsController < ApplicationController
 
   def edit
     @question = Question.find params[:id]
+    @course = @question.course
   end
 
   def update
     @question = Question.find params[:id]
     if @question.update_attributes question_params
-      redirect_to admin_question_path @question
+      redirect_to admin_course_path @question.course
     else
       render 'edit'
     end
@@ -28,7 +30,7 @@ class Admin::QuestionsController < ApplicationController
   def create
     @question = Question.new question_params
     if @question.save
-      redirect_to admin_questions_path
+      redirect_to admin_course_path @question.course
     else
       render 'new'
     end
