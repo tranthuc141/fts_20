@@ -1,5 +1,5 @@
 <% provide :title, @course.name %>
-<div class="col-md-8">
+<div class="col-md-6">
   <div id="content">
     <h1><%= @course.name %></h1>
     <li class="list-group-item list-group-item-info">
@@ -11,8 +11,8 @@
 </div>
 
 <div class="form-horizontal">
-  <div class="col-md-4">
-    <h1>List questions</h1>
+  <div class="col-md-3">
+    <h1>List choice questions</h1>
     <p>
       <%= link_to "Show course content", admin_course_path(@course) %>
     </p>
@@ -25,8 +25,24 @@
       </li>
     <% end %>
     </br>
-    <%= link_to 'Add a question',
+    <%= link_to 'Add a choice question',
       new_admin_question_path(course_id: @course.id),
+      remote: true, class: "btn btn-primary" %>
+  </div>
+
+  <div class="col-md-3">
+    <h1>List text questions</h1>
+    <% @course.text_questions.each_with_index do |text_question, index| %>
+      <li>
+        <%= link_to "Question #{index+1}", admin_text_question_path(text_question), remote: true %>
+        <%= link_to 'Destroy', admin_text_question_path(text_question),
+          method: :delete, data:{confirm: 'Are you sure?'}, 
+          class: "btn btn-xs btn-danger" %>
+      </li>
+    <% end %>
+    </br>
+    <%= link_to 'Add a text question',
+      new_admin_text_question_path(course_id: @course.id),
       remote: true, class: "btn btn-primary" %>
   </div>
 </div>

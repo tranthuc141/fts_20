@@ -2,20 +2,24 @@
 <div class="col-md-8">
   <% @result.answers.each_with_index do |answer, index| %>
     <div>
-      <b><%= "Question #{index+1}." %></b> <%= answer.question.content %> </br>
-    </div>
-    
-    <% answer.question.options.each do |option| %>
-      <div class='radio'>
-        <%= radio_button("option", option.question.id, option.id,
-          checked: answer.option.id == option.id, disabled: true) %>
-        <%= option.content %>
-      </div>
-    <% end %>
-
-    <div class="checkbox inline">
-      <%= check_box("answer", :answer_id,
-        checked: answer.option.correct, disabled: true) %> Correct
+      <b><%= "Question #{index+1}." %></b>
+      <% if answer.question %>
+        <%= answer.question.content %> </br>
+        <% answer.question.options.each do |option| %>
+          <div class='radio'>
+            <%= radio_button("option", option.question.id, option.id,
+              checked: answer.option.id == option.id, disabled: true) %>
+            <%= option.content %>
+          </div>
+        <% end %>
+        <div class="checkbox inline">
+          <%= check_box("answer", :answer_id,
+            checked: answer.correct, disabled: true) %> Correct
+        </div>
+      <% else %>
+        <%= answer.text_question.content %> </br>
+        <b>Answer: </b><%= answer.content %>
+      <% end %>
     </div>
   <% end %>
 </div>

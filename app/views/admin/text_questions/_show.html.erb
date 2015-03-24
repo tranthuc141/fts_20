@@ -1,0 +1,14 @@
+<div class="content">
+  <b>Question:</b>
+  <div>
+    <li class="list-group-item list-group-item-info">
+      <%= @text_question.content %> </br>
+    </li>
+  </div>
+  <b>Answer :</b>
+  <div>
+    <%= @text_question.sample_answer %>
+  </div>
+  <%= link_to 'Edit', edit_admin_text_question_path(@text_question),
+    remote: true, class: "btn btn-warning" %>
+</div>

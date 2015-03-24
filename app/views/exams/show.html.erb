@@ -2,6 +2,7 @@
 <%= form_for [@exam, result = Result.new] do |f| %>
   <% result.answers.build %>
   <div class="col-md-8">
+    <h2>Part 1: Choice question</h2>
     <% @exam.course.questions.each_with_index do |question, index| %>
       <%= f.fields_for :answers do |builder| %>
         <%= builder.hidden_field :question_id, value: question.id %>
@@ -13,6 +14,17 @@
             <%= builder.label :option_id, option.content %>
           </div>
         <% end %>
+      <% end %>
+    <% end %>
+    <h2>Part 2: Text question</h2>
+    <% @exam.course.text_questions.each_with_index do |text_question, index| %>
+      <%= f.fields_for :answers do |builder| %>
+        <%= builder.hidden_field :text_question_id, value: text_question.id %>
+        <b><%= "Question #{index+1}." %></b> <%= text_question.content %>
+        <div class="field">
+          <%= builder.label :content, "Answer" %><br>
+          <%= builder.text_area :content, rows: 10, class: "form-control" %>
+        </div>
       <% end %>
     <% end %>
   </div>
