@@ -1,0 +1,39 @@
+<h1>Exams</h1>
+<div class="row">
+  <%= form_for Exam.new do |f| %>
+    <div class="col-md-4">
+      <% @courses.each do |course| %>
+        <div class="checkbox inline">
+          <%= f.check_box :course_id, {}, course.id, false %> <%= course.name %> <br />
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-md-4">
+      <%= f.hidden_field :status, value: 'not_check_yet' %>
+      <%= f.submit "Submit" %>
+    </div>
+  <% end %>
+
+  <div class="col-md-4"> 
+    <% current_user.exams.ready_exams.each do |exam| %>
+      <% unless exam.course.nil? %>
+        <%= exam.course.name %>
+        <%= link_to 'start', exam_path(exam) %> </br>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    <% current_user.exams.checked_exams.each do |exam| %>
+      <%= exam.course.name %> |
+      <% result = exam.result %>
+      <% unless result.nil? %>
+        Score: <%= result.score %>/<%= exam.course.questions.count %> |
+        <%= link_to 'View', exam_result_path(exam, result) %>
+      <% end %></br>
+    <% end %>
+  </div>
+</div>

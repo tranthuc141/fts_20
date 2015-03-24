@@ -1,0 +1,21 @@
+<h1><%= @exam.course.name %></h1>
+<%= form_for [@exam, result = Result.new] do |f| %>
+  <% result.answers.build %>
+  <div class="col-md-8">
+    <% @exam.course.questions.each_with_index do |question, index| %>
+      <%= f.fields_for :answers do |builder| %>
+        <%= builder.hidden_field :question_id, value: question.id %>
+        <b><%= "Question #{index+1}." %></b> <%= question.content %>
+
+        <% question.options.each do |option| %>
+          <div class='radio'>              
+            <%= builder.radio_button :option_id, option.id %>
+            <%= builder.label :option_id, option.content %>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+  <%= f.hidden_field :exam_id, value: @exam.id %>
+  <%= f.submit "Submit" %>
+<% end %>
