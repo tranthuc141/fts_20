@@ -6,11 +6,17 @@
       <%= f.fields_for :answers do |builder| %>
         <%= builder.hidden_field :question_id, value: question.id %>
         <b><%= "Question #{index+1}." %></b> <%= question.content %>
-
-        <% question.options.each do |option| %>
-          <div class='radio'>              
-            <%= builder.radio_button :option_id, option.id %>
-            <%= builder.label :option_id, option.content %>
+        <% if question.type_question == "choice_question" %>
+          <% question.options.each do |option| %>
+            <div class='radio'>              
+              <%= builder.radio_button :option_id, option.id %>
+              <%= builder.label :option_id, option.content %>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="field">
+            <%= builder.label :content, "Answer" %><br>
+            <%= builder.text_area :content, rows: 10, class: "form-control" %>
           </div>
         <% end %>
       <% end %>

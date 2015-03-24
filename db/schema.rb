@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20150319113708) do
     t.integer  "result_id"
     t.integer  "option_id"
     t.integer  "question_id"
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -39,7 +40,7 @@ ActiveRecord::Schema.define(version: 20150319113708) do
   create_table "options", force: true do |t|
     t.integer  "question_id"
     t.text     "content"
-    t.boolean  "correct"
+    t.boolean  "correct",     default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -47,6 +48,7 @@ ActiveRecord::Schema.define(version: 20150319113708) do
   create_table "questions", force: true do |t|
     t.text     "content"
     t.integer  "course_id"
+    t.string   "type_question"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

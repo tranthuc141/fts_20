@@ -45,7 +45,7 @@ class Admin::QuestionsController < ApplicationController
 
   private
   def question_params
-    params.require(:question).permit :course_id,
+    params.require(:question).permit :course_id, :type_question,
       :content, options_attributes: [:id, :content, :correct]
   end
 end
