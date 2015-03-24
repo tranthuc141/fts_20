@@ -17,6 +17,6 @@ class ResultsController < ApplicationController
   private
   def result_params
     params.require(:result).permit :exam_id,
-      answers_attributes: [:id, :option_id, :question_id]
+      answers_attributes: [:id, :option_id, :question_id, :content]
   end
 end

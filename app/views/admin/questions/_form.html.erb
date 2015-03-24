@@ -3,16 +3,31 @@
     <%= f.label :content, 'Question' %><br />
     <%= f.text_area :content, rows: 3 %><br />
   </div>
-  <%= f.fields_for :options do |builder| %>
-    <div class="field">
-      <%= builder.label :content, 'Option' %>
-      <%= builder.text_field :content, class: 'form-control' %>
-    </div>
-    <div class="checkbox inline">
-      <%= builder.check_box :correct %>
-      <%= builder.label :correct, 'Correct?' %>
-    </div>
-  <% end %>
+  <div id="type_question" class="radio">
+    <%= f.radio_button :type_question, "choice_question", checked: true %> Choice question </br>
+    <%= f.radio_button :type_question, "text_question" %> Text Question
+  </div>
+  <div id="answer-area">
+    <%= f.fields_for :options do |builder| %>
+      <div class="field">
+        <%= builder.label :content, 'Option' %>
+        <%= builder.text_field :content, class: 'form-control' %>
+      </div>
+      <div class="checkbox inline">
+        <%= builder.check_box :correct %>
+        <%= builder.label :correct, 'Correct?' %>
+      </div>
+    <% end %>
+  </div>
   <%= f.hidden_field :course_id, value: @course.id%>
   <p><%= f.submit 'Submit', class: "btn btn-primary" %></p>
 <% end %>
+ 
+<script>
+  $('#type_question input').on('change', function() {
+    if(($('input[name="question[type_question]"]:checked',
+        '#type_question').val()) == "text_question")
+      $("#answer-area").hide();
+    else $("#answer-area").show();
+  });
+</script>
