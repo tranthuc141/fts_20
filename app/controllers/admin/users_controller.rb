@@ -1,13 +1,12 @@
 class Admin::UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :admin_permission
+  load_and_authorize_resource
   
   def index
-    @users = User.normal.paginate page: params[:page]
+    @users = @users.normal.paginate page: params[:page]
   end
 
   def destroy
-    @user = User.find params[:id]
     @user.destroy
     flash[:notice] = 'User has been deleted'
     redirect_to admin_users_url

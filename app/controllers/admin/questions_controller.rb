@@ -1,20 +1,17 @@
 class Admin::QuestionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :admin_permission
+  load_and_authorize_resource
 
   def show
-    @question = Question.find params[:id]
     @options = @question.options
   end
 
   def new
     @course = Course.find params[:course_id]
-    @question = Question.new
     4.times {@question.options.build}
   end
 
   def create
-    @question = Question.new question_params
     if @question.save
       redirect_to admin_course_path @question.course
     else
@@ -23,12 +20,10 @@ class Admin::QuestionsController < ApplicationController
   end
 
   def edit
-    @question = Question.find params[:id]
     @course = @question.course
   end
 
   def update
-    @question = Question.find params[:id]
     if @question.update_attributes question_params
       redirect_to admin_course_path @question.course
     else
@@ -37,7 +32,6 @@ class Admin::QuestionsController < ApplicationController
   end
 
   def destroy
-    @question = Question.find params[:id]
     @question.destroy
     flash[:success] = "Question deleted"
     redirect_to admin_course_path @question.course

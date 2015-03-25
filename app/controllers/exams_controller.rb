@@ -1,16 +1,12 @@
 class ExamsController < ApplicationController
   before_action :authenticate_user!
+  load_and_authorize_resource
 
   def index
     @courses = Course.all
   end
 
-  def show
-    @exam = Exam.find params[:id]
-  end
-
   def create
-    @exam = Exam.new exam_params
     @exam.user = current_user
     if @exam.save
       redirect_to exams_path
