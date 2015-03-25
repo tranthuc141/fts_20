@@ -2,6 +2,15 @@ class Admin::CoursesController < ApplicationController
   before_action :authenticate_user!
   before_action :admin_permission
 
+  def index
+    @courses = Course.all.paginate page: params[:page]
+  end
+
+  def show
+    @course = Course.find params[:id]
+    @questions = @course.questions
+  end
+
   def new
     @course = Course.new
   end
@@ -13,15 +22,6 @@ class Admin::CoursesController < ApplicationController
     else
       render 'new'
     end
-  end
-
-  def index
-    @courses = Course.all.paginate page: params[:page]
-  end
-
-  def show
-    @course = Course.find params[:id]
-    @questions = @course.questions
   end
 
   def edit
@@ -44,6 +44,6 @@ class Admin::CoursesController < ApplicationController
 
   private
   def course_params
-    params.require(:course).permit :name, :description
+    params.require(:course).permit :name, :time_limit, :description
   end
 end

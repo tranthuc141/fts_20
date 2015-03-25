@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150319113708) do
+ActiveRecord::Schema.define(version: 20150325012220) do
 
   create_table "answers", force: true do |t|
     t.integer  "result_id"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20150319113708) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "time_limit"
   end
 
   create_table "exams", force: true do |t|

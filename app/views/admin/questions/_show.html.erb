@@ -1,24 +1,23 @@
 <div class="content">
   <b>Question:</b>
   <div>
-  <li class="list-group-item list-group-item-info">
-  <%= @question.content %> </br>
-  </li>
+    <li class="list-group-item list-group-item-info">
+      <%= @question.content %> </br>
+    </li>
   </div>
-  </br>
   <b>Answer :</b>
   <div>
-  <table class="table table-bordered">
-    <% @options.each do |option| %>
-    <tr>
-    <% unless option.correct %>
-      <td><%= option.content %></td>    
-    <% else %>
-      <td class="success"><%= option.content %></td>
-    <% end %>
-    </tr>
-    <% end %>
-  </table>
+    <table class="table table-bordered">
+      <% @options.each do |option| %>
+        <tr>
+          <% unless option.correct %>
+            <td><%= option.content %></td>    
+          <% else %>
+            <td class="success"><%= option.content %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
   </div>
   <%= link_to 'Edit', edit_admin_question_path(@question), remote: true, class: "btn btn-warning" %>
 </div>

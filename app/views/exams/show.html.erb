@@ -1,3 +1,10 @@
+<%= javascript_include_tag "time_countdown" %>
+<div>
+  <div style="float: right;position:fixed;top:55px;right:200px;">Time left: <span id="__exam_time"></span>
+    <%= hidden_field_tag "__exam_time_value", @exam.course.time_limit %>
+  </div>
+</div>
+
 <h1><%= @exam.course.name %></h1>
 <%= form_for [@exam, result = Result.new] do |f| %>
   <% result.answers.build %>
@@ -23,5 +30,5 @@
     <% end %>
   </div>
   <%= f.hidden_field :exam_id, value: @exam.id %>
-  <%= f.submit "Submit" %>
+  <%= f.submit "Submit", id: "submit_answer_sheet", class: "btn btn-default btn-primary" %>
 <% end %>

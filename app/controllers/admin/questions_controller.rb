@@ -1,16 +1,25 @@
 class Admin::QuestionsController < ApplicationController
-  def new
-    @course = Course.find params[:course_id]
-    @question = Question.new
-    4.times {@question.options.build}
-  end
+  before_action :authenticate_user!
+  before_action :admin_permission
 
   def show
     @question = Question.find params[:id]
     @options = @question.options
   end
 
-  def index
+  def new
+    @course = Course.find params[:course_id]
+    @question = Question.new
+    4.times {@question.options.build}
+  end
+
+  def create
+    @question = Question.new question_params
+    if @question.save
+      redirect_to admin_course_path @question.course
+    else
+      render 'new'
+    end
   end
 
   def edit
@@ -24,15 +33,6 @@ class Admin::QuestionsController < ApplicationController
       redirect_to admin_course_path @question.course
     else
       render 'edit'
-    end
-  end
-
-  def create
-    @question = Question.new question_params
-    if @question.save
-      redirect_to admin_course_path @question.course
-    else
-      render 'new'
     end
   end
 
