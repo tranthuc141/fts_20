@@ -76,8 +76,6 @@ GEM
     mime-types (2.4.3)
     minitest (5.5.1)
     multi_json (1.11.0)
-    mysql2 (0.3.18)
-    mysql2 (0.3.18-x86-mingw32)
     orm_adapter (0.5.0)
     pg (0.17.1)
     pg (0.17.1-x86-mingw32)
@@ -163,7 +161,6 @@ DEPENDENCIES
   faker (= 1.4.2)
   jbuilder (~> 2.0)
   jquery-rails
-  mysql2
   pg (= 0.17.1)
   rails (= 4.1.6)
   rails_12factor (= 0.0.2)
