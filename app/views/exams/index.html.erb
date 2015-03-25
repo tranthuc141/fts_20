@@ -32,7 +32,10 @@
       <% result = exam.result %>
       <% unless result.nil? %>
         Score: <%= result.score %>/<%= exam.course.questions.count %> |
-        <%= link_to 'View', exam_result_path(exam, result) %>
+        <%= link_to 'View', exam_result_path(exam, result),
+                                            class: "btn btn-xs btn-info" %>
+        <%= link_to 'Export', exam_result_path(exam, result, format: :csv),
+                                            class: "btn btn-xs btn-primary" %>
       <% end %></br>
     <% end %>
   </div>
