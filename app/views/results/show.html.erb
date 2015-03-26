@@ -14,7 +14,7 @@
       <% end %>
       <div class="checkbox inline">
         <%= check_box("answer", :answer_id,
-          checked: answer.option.correct, disabled: true) %> Correct
+          checked: answer.correct, disabled: true) %> Correct
       </div>
     <% else %>
       <b>Answer: </b><%= answer.content %>

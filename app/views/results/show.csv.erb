@@ -1,0 +1,25 @@
+Name : <%= @result.exam.user.name %>
+Email : <%= @result.exam.user.email %>
+Name of course : <%= @result.exam.course.name %>
+Date : <%= @result.updated_at %>
+Score : <%= @result.score %>/<%= @result.exam.course.questions.count %>
+<% @result.answers.each_with_index do |answer, index| %>
+  Question <%= index+1 %> : <%= answer.question.content %>
+  Answer :
+  <% if answer.question.type_question == "choice_question" %>
+    <% answer.question.options.each do |option| %>
+      <% unless answer.option.id == option.id %>
+        <%= option.content %>
+      <% else %>
+        <%= option.content %> // Selected
+      <% end %>
+    <% end %>
+    <% unless answer.correct %>
+      Incorrect
+    <% else %>
+      Correct
+    <% end %>
+  <% else %>
+    Answer: <%= answer.content %>
+  <% end %>
+<% end %>

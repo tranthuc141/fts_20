@@ -3,6 +3,13 @@ class ResultsController < ApplicationController
 
   def show
     @result = Result.find params[:id]
+    respond_to do |format|
+      format.html
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"#{@result.id}.csv\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
+    end
   end
   
   def create
