@@ -1,4 +1,5 @@
 <%= form_for [:admin, @question] do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
     <%= f.label :content, 'Question' %><br />
     <%= f.text_area :content, rows: 3 %><br />

@@ -4,4 +4,6 @@ class Question < ActiveRecord::Base
   belongs_to :course
 
   accepts_nested_attributes_for :options
+
+  validates :content, presence: true
 end
