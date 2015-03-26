@@ -8,13 +8,15 @@
       <% answer.question.options.each do |option| %>
         <div class='radio'>
           <%= radio_button("option", option.question.id, option.id,
-            checked: answer.option.id == option.id, disabled: true) %>
+            checked: answer.option ? answer.option.id == option.id : false,
+            disabled: true) %>
           <%= option.content %>
         </div>
       <% end %>
       <div class="checkbox inline">
         <%= check_box("answer", :answer_id,
-          checked: answer.correct, disabled: true) %> Correct
+          checked: answer.option ? answer.option.correct : false,
+          disabled: true) %> Correct
       </div>
     <% else %>
       <b>Answer: </b><%= answer.content %>

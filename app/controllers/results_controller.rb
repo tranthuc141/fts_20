@@ -1,8 +1,8 @@
 class ResultsController < ApplicationController
   before_action :authenticate_user!
+  load_and_authorize_resource
 
   def show
-    @result = Result.find params[:id]
     respond_to do |format|
       format.html
       format.csv do
@@ -11,9 +11,8 @@ class ResultsController < ApplicationController
       end
     end
   end
-  
+
   def create
-    @result = Result.new result_params
     if @result.save
       redirect_to exams_path
     else
