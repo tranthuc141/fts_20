@@ -5,4 +5,5 @@ class Exam < ActiveRecord::Base
 
   scope :ready_exams, -> {where status: 'not_check_yet'}
   scope :checked_exams, -> {where status: 'checked'}
+  scope :not_check_yet, -> {where status: 'not_check_yet'}
 end

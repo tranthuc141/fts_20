@@ -1,5 +1,6 @@
 <% provide :title, @user.name %>
 <div class="col-md-4">
+  <h1>Profile: </h1>
   <ul class ="list-group">
     <li class="list-group-item list-group-item-info">
       <% if @user.avatar.present? %>
@@ -22,13 +23,30 @@
   </ul>
 </div>
 
+
 <div class="row">
-  <div class="col-md-8">
-    <% @user.exams.checked_exams.each do |exam| %>
+  <div class="col-md-6">
+    <h1>Result:</h1>
+    <%= form_tag user_path(@user), method: "get" do %>
+      <p>
+        <%= text_field_tag :search, params[:search] %>
+        <div class="checkbox inline">
+          <%= check_box_tag 'checked', 2, false %>
+          Checked
+        </div>
+        <div class="checkbox inline">
+          <%= check_box_tag 'uncheck', 1, false %>
+          Not check yet
+        </div>
+        <%= submit_tag "Search by name of course" %>
+      </p>
+    <% end %>
+    <% @exam.each do |exam| %>
       <%= exam.course.name %> |
       <% result = exam.result %>
       <% unless result.nil? %>
         Score: <%= result.score %>/<%= exam.course.questions.count %> |
+        Date: <%= exam.updated_at %>
         <%= link_to 'View', exam_result_path(exam, result),
                                             class: "btn btn-xs btn-info" %>
         <%= link_to 'Export', exam_result_path(exam, result, format: :csv),
