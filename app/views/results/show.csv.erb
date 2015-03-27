@@ -8,10 +8,10 @@ Score : <%= @result.score %>/<%= @result.exam.course.questions.count %>
   Answer :
   <% if answer.question.type_question == "choice_question" %>
     <% answer.question.options.each do |option| %>
-      <% unless answer.option.id == option.id %>
-        <%= option.content %>
-      <% else %>
+      <% if answer.option.id == option.id %>
         <%= option.content %> // Selected
+      <% else %>
+        <%= option.content %> 
       <% end %>
     <% end %>
     <% unless answer.correct %>

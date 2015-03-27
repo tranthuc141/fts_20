@@ -7,6 +7,14 @@ class User < ActiveRecord::Base
 
   scope :normal, -> {where role: 'normal'}
 
+  def slug
+    name.to_s.downcase.gsub(" ", "-")  
+  end
+
+  def to_param
+    "#{id}-#{slug}"
+  end
+
   def is_admin?
     self.role == 'admin'
   end
