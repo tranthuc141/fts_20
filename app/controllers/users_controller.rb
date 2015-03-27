@@ -4,6 +4,6 @@ class UsersController < ApplicationController
 
   def show
     checked = params[:checked].to_i + params[:uncheck].to_i
-    @exam = @user.search_with_course params[:search], checked
+    @exams = @user.search_with_course params[:search], checked
   end
 end

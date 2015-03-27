@@ -42,7 +42,7 @@
       </p>
     <% end %>
     <div id="content">
-      <% @exam.each do |exam| %>
+      <% @exams.each do |exam| %>
         <%= exam.course.name %> |
         <% result = exam.result %>
         <% unless result.nil? %>
