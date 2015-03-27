@@ -13,7 +13,7 @@
       <%= f.fields_for :answers do |builder| %>
         <%= builder.hidden_field :question_id, value: question.id %>
         <b><%= "Question #{index+1}." %></b> <%= question.content %>
-        <% if question.type_question == "choice_question" %>
+        <% if question.is_choice_question? %>
           <% question.options.each do |option| %>
             <div class='radio'>              
               <%= builder.radio_button :option_id, option.id %>

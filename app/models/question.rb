@@ -6,4 +6,11 @@ class Question < ActiveRecord::Base
   accepts_nested_attributes_for :options
 
   validates :content, presence: true
+
+  scope :choice_question, -> {where type_question: 'choice_question'}
+
+  def is_choice_question?
+    self.type_question == "choice_question"
+  end
+
 end

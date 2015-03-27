@@ -1,25 +1,25 @@
-Name : <%= @result.exam.user.name %>
-Email : <%= @result.exam.user.email %>
-Name of course : <%= @result.exam.course.name %>
-Date : <%= @result.updated_at %>
-Score : <%= @result.score %>/<%= @result.exam.course.questions.count %>
+<%= CSV.generate_line ["Name", "#{@result.exam.user.name}"], {row_sep: nil} %>
+<%= CSV.generate_line ["Email", "#{@result.exam.user.email}"], {row_sep: nil} %>
+<%= CSV.generate_line ["Name of course", "#{@result.exam.course.name}"], {row_sep: nil} %>
+<%= CSV.generate_line ["Date", "#{@result.updated_at}"], {row_sep: nil} %>
+<%= CSV.generate_line ["Correct", "#{@result.score}"], {row_sep: nil} %>
+<%= CSV.generate_line ["Number of question", "#{@result.exam.course.questions.choice_question.count}"], {row_sep: nil} %>
 <% @result.answers.each_with_index do |answer, index| %>
-  Question <%= index+1 %> : <%= answer.question.content %>
-  Answer :
-  <% if answer.question.type_question == "choice_question" %>
-    <% answer.question.options.each do |option| %>
-      <% if answer.option.id == option.id %>
-        <%= option.content %> // Selected
+  <%= CSV.generate_line ["Question #{index+1}", "#{answer.question.content}"], {row_sep: nil} %>
+  <% if answer.question.is_choice_question? %>
+    <% answer.question.options.each_with_index do |option, index| %>
+      <% if answer.option ? answer.option.id == option.id : false %>
+        <%= CSV.generate_line ["Option #{index+1}", "#{option.content}", "Selected"], {row_sep: nil} %>
       <% else %>
-        <%= option.content %> 
+        <%= CSV.generate_line ["Option #{index+1}", "#{option.content}"], {row_sep: nil} %>
       <% end %>
     <% end %>
-    <% unless answer.correct %>
-      Incorrect
+    <% if answer.correct %>
+      <%= CSV.generate_line ["Result", "Correct"], {row_sep: nil} %>
     <% else %>
-      Correct
+      <%= CSV.generate_line ["Result", "Incorrect"], {row_sep: nil} %>
     <% end %>
   <% else %>
-    Answer: <%= answer.content %>
+    <%= CSV.generate_line ["#{answer.content}"], {row_sep: nil} %>
   <% end %>
 <% end %>

@@ -5,7 +5,6 @@ class Course < ActiveRecord::Base
   validates :name, presence: true
   validates :time_limit, presence: true
 
-
   def self.search_by_name name
     where("name LIKE ?", "%#{name}%")
   end
