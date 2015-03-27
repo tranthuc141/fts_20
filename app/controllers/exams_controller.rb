@@ -4,6 +4,8 @@ class ExamsController < ApplicationController
 
   def index
     @courses = Course.all
+    checked = params[:checked].to_i + params[:uncheck].to_i
+    @exam = current_user.search_with_course params[:search], checked
   end
 
   def create
