@@ -27,7 +27,7 @@
 <div class="row">
   <div class="col-md-6">
     <h1>Result:</h1>
-    <%= form_tag user_path(@user), method: "get" do %>
+    <%= form_tag user_path(@user), method: "get", remote: true do %>
       <p>
         <%= text_field_tag :search, params[:search] %>
         <div class="checkbox inline">
@@ -41,21 +41,23 @@
         <%= submit_tag "Search by name of course" %>
       </p>
     <% end %>
-    <% @exam.each do |exam| %>
-      <%= exam.course.name %> |
-      <% result = exam.result %>
-      <% unless result.nil? %>
-        Score: <%= result.score %>/<%= exam.course.questions.count %> |
-        Date: <%= exam.updated_at %>
-        <%= link_to 'View', exam_result_path(exam, result),
-                                            class: "btn btn-xs btn-info" %>
-        <%= link_to 'Export', exam_result_path(exam, result, format: :csv),
-                                            class: "btn btn-xs btn-primary" %>
-        <% if can? :destroy, exam %>
-          <%= link_to 'Destroy', exam, class: "btn btn-xs btn-danger",
-                    method: :delete, data: {confirm: 'Are you sure?'} %>
-        <% end %>
-      <% end %></br>
-    <% end %>
+    <div id="content">
+      <% @exam.each do |exam| %>
+        <%= exam.course.name %> |
+        <% result = exam.result %>
+        <% unless result.nil? %>
+          Score: <%= result.score %>/<%= exam.course.questions.count %> |
+          Date: <%= exam.updated_at %>
+          <%= link_to 'View', exam_result_path(exam, result),
+                                              class: "btn btn-xs btn-info" %>
+          <%= link_to 'Export', exam_result_path(exam, result, format: :csv),
+                                              class: "btn btn-xs btn-primary" %>
+          <% if can? :destroy, exam %>
+            <%= link_to 'Destroy', exam, class: "btn btn-xs btn-danger",
+                      method: :delete, data: {confirm: 'Are you sure?'} %>
+          <% end %>
+        <% end %></br>
+      <% end %>
+    </div>
   </div>
 </div>
