@@ -4,7 +4,7 @@
     <nav>
       <p class="navbar-text pull-right">
         <% if user_signed_in? %>          
-          Hi <strong><%= current_user.name %></strong>.
+          Hi <strong><%= link_to current_user.name, user_path(current_user) %></strong>.
           <% if current_user.is_admin? %>
             <%= link_to "User Manage", admin_users_path,
                 class: 'navbar-link' %> |

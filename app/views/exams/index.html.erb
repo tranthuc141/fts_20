@@ -36,6 +36,10 @@
                                             class: "btn btn-xs btn-info" %>
         <%= link_to 'Export', exam_result_path(exam, result, format: :csv),
                                             class: "btn btn-xs btn-primary" %>
+        <% if can? :destroy, exam %>
+          <%= link_to 'Destroy', exam, class: "btn btn-xs btn-danger",
+                    method: :delete, data: {confirm: 'Are you sure?'} %>
+        <% end %>
       <% end %></br>
     <% end %>
   </div>
