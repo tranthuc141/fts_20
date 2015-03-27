@@ -15,6 +15,12 @@ class ExamsController < ApplicationController
     end
   end
 
+  def destroy
+    @exam.destroy
+    flash[:notice] = 'Exam has been deleted'
+    redirect_to user_path @exam.user
+  end
+
   private
   def exam_params
     params.require(:exam).permit :course_id, :user_id, :status
