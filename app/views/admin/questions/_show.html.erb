@@ -5,19 +5,22 @@
       <%= @question.content %> </br>
     </li>
   </div>
-  <b>Answer :</b>
-  <div>
-    <table class="table table-bordered">
-      <% @options.each do |option| %>
-        <tr>
-          <% unless option.correct %>
-            <td><%= option.content %></td>    
-          <% else %>
-            <td class="success"><%= option.content %></td>
-          <% end %>
-        </tr>
-      <% end %>
-    </table>
-  </div>
+  <% if @question.is_choice_question? %>
+    <b>Answer :</b>
+    <div>
+      <table class="table table-bordered">
+        <% @options.each do |option| %>
+          <tr>
+            <% unless option.correct %>
+              <td><%= option.content %></td>    
+            <% else %>
+              <td class="success"><%= option.content %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  <% end %>
+  </br>
   <%= link_to 'Edit', edit_admin_question_path(@question), remote: true, class: "btn btn-warning" %>
 </div>

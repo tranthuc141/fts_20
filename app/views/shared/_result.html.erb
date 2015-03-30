@@ -2,7 +2,7 @@
   <%= exam.course.name %> |
   <% result = exam.result %>
   <% unless result.nil? %>
-    Score: <%= result.score %>/<%= exam.course.questions.count %> |
+    Score: <%= result.score %>/<%= exam.course.questions.choice_question.count %> |
     Date: <%= exam.updated_at %>
     <%= link_to 'View', exam_result_path(exam, result),
                                         class: "btn btn-xs btn-info" %>
