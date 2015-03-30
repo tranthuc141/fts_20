@@ -1,10 +1,9 @@
-<%= javascript_include_tag "time_countdown" %>
-<div>
-  <div style="float: right;position:fixed;top:55px;right:200px;">Time left: <span id="__exam_time"></span>
-    <%= hidden_field_tag "__exam_time_value", @exam.course.time_limit %>
-  </div>
+<div style="float: right;position:fixed;top:55px;right:200px;">
+  Time left: 
+  <span id="time_left">
+    <%= second_to_time @exam.time_left %>
+  </span>
 </div>
-
 <h1><%= @exam.course.name %></h1>
 <%= form_for [@exam, result = Result.new] do |f| %>
   <% result.answers.build %>
@@ -16,14 +15,14 @@
         <% if question.is_choice_question? %>
           <% question.options.each do |option| %>
             <div class='radio'>              
-              <%= builder.radio_button :option_id, option.id %>
+              <%= builder.radio_button :option_id, option.id, disabled: @exam.time_out? %>
               <%= builder.label :option_id, option.content %>
             </div>
           <% end %>
         <% else %>
           <div class="field">
             <%= builder.label :content, "Answer" %><br>
-            <%= builder.text_area :content, rows: 10, class: "form-control" %>
+            <%= builder.text_area :content, rows: 10, disabled: @exam.time_out?, class: "form-control" %>
           </div>
         <% end %>
       <% end %>
