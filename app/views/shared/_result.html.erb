@@ -1,16 +1,20 @@
-<% @exams.each do |exam| %>
-  <%= exam.course.name %> |
-  <% result = exam.result %>
-  <% unless result.nil? %>
-    Score: <%= result.score %>/<%= exam.course.questions.choice_question.count %> |
-    Date: <%= exam.updated_at %>
-    <%= link_to 'View', exam_result_path(exam, result),
-                                        class: "btn btn-xs btn-info" %>
-    <%= link_to 'Export', exam_result_path(exam, result, format: :csv),
-                                        class: "btn btn-xs btn-primary" %>
-    <% if can? :destroy, exam %>
-      <%= link_to 'Destroy', exam, class: "btn btn-xs btn-danger",
-                method: :delete, data: {confirm: 'Are you sure?'} %>
-    <% end %>
-  <% end %></br>
-<% end %>
+ <% if @exams.first %> 
+  <% @exams.each do |exam| %>
+    <%= exam.course.name %> |
+    <% result = exam.result %>
+    <% unless result.nil? %>
+      Score: <%= result.score %>/<%= exam.course.questions.choice_question.count %> |
+      Date: <%= exam.updated_at %>
+      <%= link_to 'View', exam_result_path(exam, result),
+                                          class: "btn btn-xs btn-info" %>
+      <%= link_to 'Export', exam_result_path(exam, result, format: :csv),
+                                          class: "btn btn-xs btn-primary" %>
+      <% if can? :destroy, exam %>
+        <%= link_to 'Destroy', exam, class: "btn btn-xs btn-danger",
+                  method: :delete, data: {confirm: 'Are you sure?'} %>
+      <% end %>
+    <% end %></br>
+  <% end %>
+<% else %>
+  Record not found
+<% end %> 
