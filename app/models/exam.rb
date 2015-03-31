@@ -11,8 +11,8 @@ class Exam < ActiveRecord::Base
   end
 
   def timeout
-   created_at + self.course.time_limit.minutes
-   end
+    created_at + self.course.time_limit.minutes
+  end
 
   def time_left
     timeout - Time.zone.now

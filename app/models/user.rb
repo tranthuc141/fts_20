@@ -19,13 +19,7 @@ class User < ActiveRecord::Base
     self.role == 'admin'
   end
 
-  def search_with_course course_name, checked
-    if checked == 1
-      self.exams.not_check_yet.joins(:course).merge Course.search_by_name course_name
-    elsif checked == 2
-      self.exams.checked_exams.joins(:course).merge Course.search_by_name course_name
-    else
-      self.exams.joins(:course).merge Course.search_by_name course_name
-    end
+  def search_with_course exams, course_name
+    exams.joins(:course).merge Course.search_by_name course_name
   end
 end

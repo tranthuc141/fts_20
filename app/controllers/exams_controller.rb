@@ -4,8 +4,9 @@ class ExamsController < ApplicationController
 
   def index
     @courses = Course.all
-    checked = params[:checked].to_i + params[:uncheck].to_i
-    @exams = current_user.search_with_course params[:search], checked
+    exams = current_user.exams
+    exams = exams.send(params[:type]) if params[:type] && params[:type] != 'all'
+    @exams = current_user.search_with_course exams, params[:search]
   end
 
   def create
