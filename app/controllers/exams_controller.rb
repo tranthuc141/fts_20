@@ -14,7 +14,8 @@ class ExamsController < ApplicationController
     if @exam.save
       redirect_to exams_path
     else
-      flash[:notice] = "Can't submit, something wrong"
+      redirect_to exams_path
+      flash[:alert] = "Can't submit, something wrong"
     end
   end
 
