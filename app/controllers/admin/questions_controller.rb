@@ -3,6 +3,7 @@ class Admin::QuestionsController < ApplicationController
   load_and_authorize_resource
 
   def show
+    @question = Question.find params[:id]
     @options = @question.options
   end
 
@@ -13,6 +14,7 @@ class Admin::QuestionsController < ApplicationController
 
   def create
     if @question.save
+      flash[:notice] = 'Question has been created'
       redirect_to admin_course_path @question.course
     else
       render 'new'

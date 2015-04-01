@@ -4,14 +4,19 @@ class ExamsController < ApplicationController
 
   def index
     @courses = Course.all
-    exams = current_user.exams
-    exams = exams.send(params[:type]) if params[:type] && params[:type] != 'all'
+    exams = params[:type] && params[:type] != 'all' ?
+      current_user.exams.send(params[:type]) : current_user.exams
     @exams = current_user.search_with_course exams, params[:search]
+  end
+
+  def show
+    @exam = Exam.find params[:id]
   end
 
   def create
     @exam.user = current_user
     if @exam.save
+      flash[:notice] = 'Exam has been created'
       redirect_to exams_path
     else
       redirect_to exams_path

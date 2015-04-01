@@ -12,6 +12,7 @@ class Admin::CoursesController < ApplicationController
 
   def create
     if @course.save
+      flash[:notice] = 'Course has been created'
       redirect_to admin_course_path @course
     else
       render 'new'

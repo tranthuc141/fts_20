@@ -3,7 +3,9 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
   def show
-    checked = params[:checked].to_i + params[:uncheck].to_i
-    @exams = @user.search_with_course params[:search], checked
+    @user = User.find params[:id]
+    exams = params[:type] && params[:type] != 'all' ?
+      @user.exams.send(params[:type]) : @user.exams
+    @exams = @user.search_with_course exams, params[:search]
   end
 end
