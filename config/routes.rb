@@ -6,14 +6,14 @@ Rails.application.routes.draw do
   end
   root to: 'static_pages#home'
 
-  resources :users
+  resources :users, only: :show
   resources :exams do
-    resources :results
+    resources :results, only: [:show, :create]
   end
   
   namespace :admin do
-    resources :users
-    resources :questions
+    resources :users, only: [:index, :destroy]
+    resources :questions, except: :index
     resources :courses
   end
 end
