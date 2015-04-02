@@ -11,6 +11,8 @@
         Added <%= time_ago_in_words course.created_at %> ago.
         <%= link_to "Details", admin_course_path(course),
                                   class: "btn btn-xs btn-info" %> |
+        <%= link_to 'Export CSV', admin_course_path(course, format: :csv),
+                                          class: "btn btn-xs btn-primary" %> |
         <%= link_to "Delete", admin_course_path(course),
                                   class: "btn btn-xs btn-danger",
                                   method: :delete,

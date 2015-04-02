@@ -1,0 +1,14 @@
+<%= CSV.generate_line ["Name of course", "#{@course.name}"], {row_sep: nil} %>
+<%= CSV.generate_line ["Number of question", "#{@course.questions.count}"], {row_sep: nil} %>
+<% @course.questions.each_with_index do |question, index| %>
+  <%= CSV.generate_line ["Question #{index+1}", "#{question.content}"], {row_sep: nil} %>
+  <% if question.is_choice_question? %>
+    <% question.options.each_with_index do |option, index| %>
+      <% if option.correct %>
+        <%= CSV.generate_line ["Option #{index+1}", "#{option.content}", "Correct"], {row_sep: nil} %>
+      <% else %>
+        <%= CSV.generate_line ["Option #{index+1}", "#{option.content}"], {row_sep: nil} %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
